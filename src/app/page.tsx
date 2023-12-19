@@ -23,6 +23,9 @@ interface Recipe {
 const getRecipes = async (): Promise<Recipe[]> => {
   const result = await fetch("http://localhost:4000/recipes")
 
+  // delay promise
+  await new Promise<any>((resolve) => setTimeout(resolve, 3000))
+
   return result.json()
 }
 
@@ -35,7 +38,7 @@ export default async function Home() {
           <Card key={item.id} className="flex flex-col justify-between">
             <CardHeader className="flex-row gap-4 items-center">
               <Avatar>
-                <AvatarImage src={`/img/${item.image}`} alt="recipe img"/>
+                <AvatarImage src={`/img/${item.image}`} alt="recipe img" />
                 <AvatarFallback>
                   {item.title.slice(0, 2)}
                 </AvatarFallback>
